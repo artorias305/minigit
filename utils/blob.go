@@ -4,6 +4,7 @@ import (
 	"crypto/sha1"
 	"encoding/hex"
 	"os"
+	"strconv"
 )
 
 type Blob struct {
@@ -13,11 +14,13 @@ type Blob struct {
 }
 
 func NewBlob(data string) *Blob {
-	hash := hashString(data)
+	size := len(data)
+	canonical := "blob " + strconv.Itoa(size) + "\x00" + data
+	hash := hashString(canonical)
 	return &Blob{
 		Data: data,
 		Hash: hash,
-		Size: len(data),
+		Size: size,
 	}
 }
 
