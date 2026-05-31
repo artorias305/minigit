@@ -45,5 +45,17 @@ func main() {
 			os.Exit(1)
 		}
 		fmt.Println(hash)
+	case "cat-file":
+		if len(os.Args) != 3 {
+			fmt.Fprintf(os.Stderr, "Usage: minigit cat-file <hash>\n")
+			os.Exit(1)
+		}
+		hash := os.Args[2]
+		content, err := commands.CatFile(hash)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "cat-file failed: %v\n", err)
+			os.Exit(1)
+		}
+		fmt.Println(content)
 	}
 }
