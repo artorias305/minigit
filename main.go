@@ -57,5 +57,10 @@ func main() {
 			os.Exit(1)
 		}
 		fmt.Println(content)
+	case "write-tree":
+		if err := commands.WriteTree(); err != nil {
+			fmt.Fprintf(os.Stderr, "write-tree failed: %v\n", err)
+			os.Exit(1)
+		}
 	}
 }
